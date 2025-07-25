@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useGetAllUsers } from "../../hooks/useGetAllUsers";
 import { useCreateUser } from "../../hooks/createUser";
-import { Typography, Box, Button, Modal, TextField, Grid } from "@mui/material";
+import { Typography, Box, Button, Modal, TextField } from "@mui/material";
 import type { UserTypes } from "../../types/interfaces";
 import { useDeleteUser } from "../../hooks/useDeleteUser";
 import { useUpdateUser } from "../../hooks/useUpdateUser";
@@ -110,50 +110,63 @@ const Users = () => {
         </Box>
       </Modal>
 
-      <Grid container spacing={2} sx={{ marginTop: "20px" }}>
+      {/* Grid container qoladi */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "20px",
+          marginTop: "20px",
+          padding: "0 40px",
+        }}
+      >
         {users?.map((user) => (
-          <Grid item key={user.id} xs={12} sm={6} md={4}>
-            <Box
-              border={1}
-              borderRadius={2}
-              p={2}
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{ maxWidth: 300, margin: "0 auto" }}
-            >
-              <img
-                src={user.avatar}
-                alt={user.name}
-                style={{ width: "200px", height: "200px", objectFit: "cover" }}
-              />
-              <Typography variant="h6" mt={1}>
-                {user.name}
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                {user.email}
-              </Typography>
-              <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
-                <Button
-                  size="small"
-                  variant="contained"
-                  onClick={() => handleEdit(user)}
-                >
-                  Edit
-                </Button>
-                <Button
-                  size="small"
-                  style={{ background: "red", color: "white" }}
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Delete
-                </Button>
-              </div>
-            </Box>
-          </Grid>
+          <div
+            key={user.id}
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "12px",
+              padding: "16px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={user.avatar}
+              alt={user.name}
+              style={{
+                width: "200px",
+                height: "200px",
+                objectFit: "cover",
+              }}
+            />
+            <Typography variant="h6" mt={1}>
+              {user.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {user.email}
+            </Typography>
+            <div style={{ marginTop: "10px", display: "flex", gap: "10px" }}>
+              <Button
+                size="small"
+                variant="contained"
+                onClick={() => handleEdit(user)}
+              >
+                Edit
+              </Button>
+              <Button
+                size="small"
+                style={{ background: "red", color: "white" }}
+                onClick={() => handleDelete(user.id)}
+              >
+                Delete
+              </Button>
+            </div>
+          </div>
         ))}
-      </Grid>
+      </div>
     </>
   );
 };
